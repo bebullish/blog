@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="请求响应，事件驱动">
-    <meta name="description" content="请求响应架构与事件驱动架构">
+    <meta name="keywords" content="kubernetes,graceShutdown,优雅关闭">
+    <meta name="description" content="kubernetes 零宕机更新">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -27,18 +27,18 @@
 </script>
 
 
-    <title>Spring WebFlux 入门系列（二）：事件驱动架构 | bebullish</title>
-    <link rel="icon" type="image/png" href="/medias/favicon.png">
+    <title>Kubernetes 优雅关闭 | bebullish</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/bebullish/blog/medias/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bebullish/blog/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bebullish/blog/css/my.css">
 
-    <script src="/libs/jquery/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/jquery/jquery.min.js"></script>
 
 <meta name="generator" content="Hexo 5.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
@@ -52,7 +52,7 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="https://cdn.jsdelivr.net/gh/bebullish/blog/medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">bebullish</span>
                 </a>
@@ -140,7 +140,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="https://cdn.jsdelivr.net/gh/bebullish/blog/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">bebullish</div>
         <div class="logo-desc">
@@ -299,12 +299,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/static/archives/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/bebullish/blog/static/archives/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Spring WebFlux 入门系列（二）：事件驱动架构</h1>
+                    <h1 class="description center-align post-title">Kubernetes 优雅关闭</h1>
                 </div>
             </div>
         </div>
@@ -317,7 +317,7 @@
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -421,8 +421,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/tags/">
-                                <span class="chip bg-color">tags</span>
+                            <a href="/tags/Kubernetes/">
+                                <span class="chip bg-color">Kubernetes</span>
+                            </a>
+                        
+                            <a href="/tags/graceShutdown/">
+                                <span class="chip bg-color">graceShutdown</span>
+                            </a>
+                        
+                            <a href="/tags/%E4%BC%98%E9%9B%85%E5%85%B3%E9%97%AD/">
+                                <span class="chip bg-color">优雅关闭</span>
                             </a>
                         
                     </div>
@@ -433,8 +441,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/categories/" class="post-category">
-                                categories
+                            <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/" class="post-category">
+                                云原生
                             </a>
                         
                     </div>
@@ -446,33 +454,33 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-17
+                    2021-01-17
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-30
+                    2021-01-17
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    364
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    1 分
                 </div>
                 
 
                 <!-- 基于 Valine 实现文章阅读次数统计 -->
-                <span id="/archives/512a6ef2.html" class="leancloud_visitors info-break-policy" data-flag-title="'Spring WebFlux 入门系列（二）：事件驱动架构'">
+                <span id="/archives/fa802731.html" class="leancloud_visitors info-break-policy" data-flag-title="'Kubernetes 优雅关闭'">
                     <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
                     <spin class="leancloud-visitors-count">0</spin>
                 </span>
@@ -483,50 +491,37 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="请求响应驱动架构"><a href="#请求响应驱动架构" class="headerlink" title="请求响应驱动架构"></a>请求响应驱动架构</h2><p>我们现在大多数服务架构都是<strong>请求响应驱动架构（Request/Response Driven Architecture）</strong>，也就是发一次请求，得到一个结果。一般请求发起方是用户操作，例如查看、修改和保存数据等。但也有些不适用于该架构的场景，例如以下几个场景，你会怎么设计呢？</p>
+                <h1 id="Kubernetes-优雅关闭"><a href="#Kubernetes-优雅关闭" class="headerlink" title="Kubernetes 优雅关闭"></a>Kubernetes 优雅关闭</h1><h2 id="删除-Pod-原理"><a href="#删除-Pod-原理" class="headerlink" title="删除 Pod 原理"></a>删除 Pod 原理</h2><p>kubernetes 删除 pod 的过程如下</p>
+<p><img src="https://image-1300600292.cos.ap-guangzhou.myqcloud.com/uPic/2021/01/3a7OUu.png" alt="pod 删除过程"></p>
+<p>pod 收到 delete 指令后，会同时做两件事</p>
 <ul>
-<li>实时显示最新数据排行</li>
-<li>实时显示点赞数、转发数</li>
-<li>实时更新任务状态</li>
+<li>修改 pod 状态，并将其准备关闭</li>
+<li>删除 endpoint，使流量不再流入该 pod</li>
 </ul>
-<h2 id="事件驱动架构"><a href="#事件驱动架构" class="headerlink" title="事件驱动架构"></a>事件驱动架构</h2><p><strong>事件驱动架构 （Event Driven Architecture）</strong>由事件发起者和事件订阅者组成。事件的发起者会检测或感知事件，并以消息的形式来表示事件。事件的发起者并不知道事件的订阅者或事件引起的结果，而事件的订阅者也不知道事件的发起者，只是将该消息进行预先定义好的逻辑执行。这里就将发起者和订阅者解耦了。用事件驱动架构来实现上述场景非常简单。</p>
+<p>我们分别解释下上述五个动作会发生什么事情</p>
 <ul>
-<li>当数据排行发生变化时，产生一个事件告知所有订阅者最新排行情况。</li>
-<li>当点赞数或转发数发生变化时，产生一个事件告知所有订阅者。</li>
-<li>当任务状态发生变化时，产生一个事件将最新任务状态发送给所有订阅者。</li>
-</ul>
-<p>拿点赞来说，请求发起方由用户变为了数据本身（数据库），当用户点赞时，实际上的执行逻辑大致应该是这样。</p>
-<ol>
-<li>用户点击点赞按钮，向后端发送点赞请求，后端将点赞数 + 1 后写入数据库。</li>
-<li>数据库检测到点赞数发生改变，通知所有建立相关事件的 UI 进行更新。</li>
-</ol>
-<p>如果以事件驱动架构实现动态显示点赞数，那用户所看到的将会是一个不停变化的、互动性极高的程序。例如，突然出现一条点赞数或转发数短时间内增长极快的内容（热搜），比起一条点赞数很高但不会变化的数字来说，这更容易引起用户的兴趣。</p>
-<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><p>在不同的架构中，对于如何捕获鼠标点击事件是大不相同的。</p>
-<ul>
-<li><p>在请求响应驱动架构中，一般采用轮训方法，那该方式有以下几个缺点。</p>
-<ul>
-<li>CPU 资源浪费</li>
-<li>实时性差</li>
-<li>每个事件（点击、双击、右键）可能需要额外的线程</li>
+<li>首先是绿色部分<ul>
+<li>1：将 pod 状态置为 terminating，但此时实际上还没有关闭 pod，并开启 terminationGracePeriodSeconds 计时</li>
+<li>2：在容器终止之前调用 preStop 钩子</li>
+<li>3：给容器发送<code>SIGTERM</code> 信号</li>
+<li>4：如果在 terminationGracePeriodSeconds 的时间内还未结束，发送 <code>SIGKILL</code> 信号，强行关闭 pod。</li>
 </ul>
 </li>
-<li><p>在事件驱动架构中，我们通过监听 onClick 事件来捕获鼠标点击事件，好处如下。</p>
-<ul>
-<li>可忽略不计的资源浪费，收到点击事件直接处理即可。</li>
-<li>实时性非常高。</li>
-<li>不同事件通过监听不同方法即可。</li>
-<li>一般只需要一个主线程和固定大小的线程池（与 CPU 一致）。</li>
-<li>异步非阻塞。</li>
+<li>青色部分<ul>
+<li>A：删除 pod 对应的 endpoint，kube-proxy 检测到 endpoint 被删除，通知 Service 更新 endpoint</li>
 </ul>
 </li>
 </ul>
-<h2 id="事件驱动架构工作原理"><a href="#事件驱动架构工作原理" class="headerlink" title="事件驱动架构工作原理"></a>事件驱动架构工作原理</h2><ul>
-<li>单线程：在程序中，只有一个主线程在执行程序代码。</li>
-<li>事件队列：在主线程之外，还维护了一个<strong>事件队列（Event Queue）</strong>，当用户的网路请求或其他异步操作到来时，由主线程将其放入事件队列中，此时并不会立即执行它，代码也不会被阻塞，主线程继续执行其他代码。</li>
-<li>事件循环：事件队列由谁来消费呢？那就是<strong>事件循环（Event Pool）</strong>机制了，它会从事件队列中取出一个事件，然后从固定的线程池中取出一个线程去执行，执行完后会通知主线程，主线程执行回调，线程归还线程池，如此循环。</li>
-</ul>
-<p>我们要做的是保证主线程不执行可能导致阻塞的代码，这些代码应该交给事件队列，由事件循环机制调动线程池处理。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>对于一些要求实时性高的数据，事件驱动架构能够更完美的胜任，而调用频率不高且不需要实时或动态刷新的数据，我们一般还是建议采用请求响应驱动架构实现，并不是说事件驱动架构就一定好，具体使用时还是要看具体的场景，以场景为主。</p>
+<h2 id="流量是如何打到-pod-上的"><a href="#流量是如何打到-pod-上的" class="headerlink" title="流量是如何打到 pod 上的"></a>流量是如何打到 pod 上的</h2><p><img src="https://image-1300600292.cos.ap-guangzhou.myqcloud.com/uPic/2021/01/gPszMF.png" alt="kubernetes kube-proxy"></p>
+<h2 id="优雅关闭"><a href="#优雅关闭" class="headerlink" title="优雅关闭"></a>优雅关闭</h2><p>首先应用程序需要正确处理 <code>SIGTERM</code> 信号，先保证应用程序可以优雅关闭，其次，由于删除 pod 对应的 endpoint 是异步的，所以需要在 <code>preStop</code> 增加一个 <code>sleep</code> 指令，用来等待 endpoint 删除，例如：</p>
+<pre class=" language-yaml"><code class="language-yaml"><span class="token key atrule">lifecycle</span><span class="token punctuation">:</span>
+  <span class="token key atrule">preStop</span><span class="token punctuation">:</span>
+    <span class="token key atrule">exec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"sleep"</span><span class="token punctuation">,</span> <span class="token string">"15"</span><span class="token punctuation">]</span></code></pre>
+<blockquote>
+<p>由于绿色任务链的所有任务所占用的时间都计算 <code>terminationGracePeriodSeconds</code> 耗时，所以 <code>spec.terminationGracePeriodSeconds</code> 设置的值应为 <code>preStop</code> 执行时长 <code>+</code> 应用程序优雅关闭时长</p>
+<p>由于在执行 <code>preStop</code> 命令的时候，pod 需要可以正常处理请求，所以 <code>preStop</code> 命令不能影响 pod 的正常工作，否则会有小部分请求异常</p>
+</blockquote>
 
             </div>
             <hr/>
@@ -552,7 +547,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://blog.bebullish.cn/archives/512a6ef2.html">http://blog.bebullish.cn/archives/512a6ef2.html</a>
+                    <a href="http://blog.bebullish.cn/archives/fa802731.html">http://blog.bebullish.cn/archives/fa802731.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -590,20 +585,28 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/tags/">
-                                    <span class="chip bg-color">tags</span>
+                                <a href="/tags/Kubernetes/">
+                                    <span class="chip bg-color">Kubernetes</span>
+                                </a>
+                            
+                                <a href="/tags/graceShutdown/">
+                                    <span class="chip bg-color">graceShutdown</span>
+                                </a>
+                            
+                                <a href="/tags/%E4%BC%98%E9%9B%85%E5%85%B3%E9%97%AD/">
+                                    <span class="chip bg-color">优雅关闭</span>
                                 </a>
                             
                         </div>
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/share/css/share.min.css">
 <div id="article-share">
 
     
     <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="/libs/share/js/social-share.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/share/js/social-share.min.js"></script>
     
 
     
@@ -721,10 +724,10 @@
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="https://cdn.jsdelivr.net/gh/bebullish/blog/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="https://cdn.jsdelivr.net/gh/bebullish/blog/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -996,8 +999,8 @@
     </div>
 </div>
 
-<script src="/libs/valine/av-min.js"></script>
-<script src="/libs/valine/Valine.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/valine/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/valine/Valine.min.js"></script>
 <script>
     new Valine({
         el: '#vcomments',
@@ -1027,31 +1030,31 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/archives/512a6ef2.html">
+                <a href="/archives/fa802731.html">
                     <div class="card-image">
                         
                         
-                        <img src="/static/archives/7.jpg" class="responsive-img" alt="Spring WebFlux 入门系列（二）：事件驱动架构">
+                        <img src="https://cdn.jsdelivr.net/gh/bebullish/blog/static/archives/13.jpg" class="responsive-img" alt="Kubernetes 优雅关闭">
                         
-                        <span class="card-title">Spring WebFlux 入门系列（二）：事件驱动架构</span>
+                        <span class="card-title">Kubernetes 优雅关闭</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            请求响应架构与事件驱动架构
+                            Kubernetes 优雅关闭
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-17
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/categories/" class="post-category">
-                                    categories
+                            <a href="/categories/%E4%BA%91%E5%8E%9F%E7%94%9F/" class="post-category">
+                                    云原生
                                 </a>
                             
                             
@@ -1062,8 +1065,16 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/tags/">
-                        <span class="chip bg-color">tags</span>
+                    <a href="/tags/Kubernetes/">
+                        <span class="chip bg-color">Kubernetes</span>
+                    </a>
+                    
+                    <a href="/tags/graceShutdown/">
+                        <span class="chip bg-color">graceShutdown</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%BC%98%E9%9B%85%E5%85%B3%E9%97%AD/">
+                        <span class="chip bg-color">优雅关闭</span>
                     </a>
                     
                 </div>
@@ -1077,31 +1088,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/archives/1b0037d2.html">
+                <a href="/archives/6241198f.html">
                     <div class="card-image">
                         
                         
-                        <img src="/static/archives/8.jpg" class="responsive-img" alt="Spring WebFlux 入门系列（一）：响应式编程">
+                        <img src="https://cdn.jsdelivr.net/gh/bebullish/blog/static/archives/5.jpg" class="responsive-img" alt="Spring WebFlux 入门系列（二）：Reactor">
                         
-                        <span class="card-title">Spring WebFlux 入门系列（一）：响应式编程</span>
+                        <span class="card-title">Spring WebFlux 入门系列（二）：Reactor</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            响应式编程基础，理解其工作原理
+                            熟悉 Reactor API，掌握反应式编程核心思想
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-24
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/" class="post-category">
-                                    响应式编程
+                            <a href="/categories/%E5%8F%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    反应式编程
                                 </a>
                             
                             
@@ -1110,10 +1121,6 @@
                 </div>
                 
                 <div class="card-action article-tags">
-                    
-                    <a href="/tags/Spring-WebFlux/">
-                        <span class="chip bg-color">Spring WebFlux</span>
-                    </a>
                     
                     <a href="/tags/Reactor/">
                         <span class="chip bg-color">Reactor</span>
@@ -1169,21 +1176,21 @@
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/codeBlock/codeShrink.js"></script>
 
 
 <!-- 代码块折行 -->
@@ -1211,7 +1218,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </div>
 
 
-<script src="/libs/tocbot/tocbot.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -1306,7 +1313,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">4.8k</span>&nbsp;字
+                class="white-color">5.8k</span>&nbsp;字
             
             
             
@@ -1375,7 +1382,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="/js/search.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/bebullish/blog/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
     searchFunc('/search.xml', 'searchInput', 'searchResult');
@@ -1390,12 +1397,12 @@ $(function () {
 </div>
 
 
-    <script src="/libs/materialize/materialize.min.js"></script>
-    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/libs/aos/aos.js"></script>
-    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bebullish/blog/js/matery.js"></script>
 
     <!-- Baidu Analytics -->
 
@@ -1427,7 +1434,7 @@ $(function () {
 
     
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -1441,7 +1448,7 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bebullish/blog/libs/instantpage/instantpage.js" type="module"></script>
     
 
 </body>
